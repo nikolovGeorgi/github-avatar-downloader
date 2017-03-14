@@ -1,9 +1,12 @@
+// AVATAR DOWNLOADER
 const fs = require('fs');
 const request = require('request');
-const GITHUB_USER = "nikolovGeorgi";
-const GITHUB_TOKEN = "53c9ebd5d4eebee3d2150b2f54c7b7483aa8d502";
+const dotenv = require('dotenv').config();
+
 const repoOwner = process.argv[2];
 const repoName = process.argv[3];
+const GITHUB_USER = process.env.GITHUB_USER;
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 console.log('Welcome to the GitHub Avatar Downloader!');
 
