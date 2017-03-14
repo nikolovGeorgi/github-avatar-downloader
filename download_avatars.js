@@ -9,6 +9,7 @@ console.log('Welcome to the GitHub Avatar Downloader!');
 
 function getRepoContributors(repoOwner, repoName, cb) {
   if (repoOwner && repoName){
+    //URL builder
     let requestURL = 'https://'+ GITHUB_USER + ':' + GITHUB_TOKEN + '@api.github.com/repos/'
      + repoOwner + '/' + repoName + '/contributors';
 
@@ -22,9 +23,11 @@ function getRepoContributors(repoOwner, repoName, cb) {
       }
       let data = JSON.parse(body);
       let path = './Avatars/';
-
+      //Loop through each person to get their avatar url and set their login name as the image name
       if(data && data.length){
         data.forEach((person) => {
+          //use separate function to download the content of the image
+          //otherwise it'll download an empty string.
           downloadImageByURL(person.avatar_url, path + person.login + '.png');
         })
       }
@@ -39,7 +42,7 @@ function downloadImageByURL(url, filePath) {
       throw err;
     })
     .on('response', function(resp) {
-      console.log("Downloding", resp.headers['content-type'], url);
+      console.log("Downloding", resp.headers['content-type'], url); //to print which url we are downloading
     })
     .on('end', function(end) {
       console.log("Download complete!");
