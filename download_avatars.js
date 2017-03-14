@@ -1,7 +1,7 @@
 // AVATAR DOWNLOADER
-const fs = require('fs');
 const request = require('request');
 const dotenv = require('dotenv').config();
+const downloadImageByURL = require('./lib/downloadImageByURL')
 
 const repoOwner = process.argv[2];
 const repoName = process.argv[3];
@@ -38,19 +38,6 @@ function getRepoContributors(repoOwner, repoName, cb) {
   } else {
     console.log("\n\nPlease make sure you your input looks like this:\n\n $ node download-avatars.js repoOwner repoName");
   }
-}
-function downloadImageByURL(url, filePath) {
-  request.get(url)
-    .on('error', function(err) {
-      throw err;
-    })
-    .on('response', function(resp) {
-      console.log("Downloding", resp.headers['content-type'], url); //to print which url we are downloading
-    })
-    .on('end', function(end) {
-      console.log("Download complete!");
-    })
-    .pipe(fs.createWriteStream(filePath));
 }
 
 getRepoContributors(repoOwner, repoName, downloadImageByURL);
