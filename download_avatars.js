@@ -31,7 +31,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
         data.forEach((person) => {
           //use separate function to download the content of the image
           //otherwise it'll download an empty string.
-          downloadImageByURL(person.avatar_url, path + person.login + '.png');
+          downloadImageByURL(person.avatar_url, path + person.login);
         });
       }
     });
