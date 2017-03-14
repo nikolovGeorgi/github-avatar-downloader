@@ -1,7 +1,7 @@
 // AVATAR DOWNLOADER
 const request = require('request');
 const dotenv = require('dotenv').config();
-const downloadImageByURL = require('./lib/downloadImageByURL')
+const downloadImageByURL = require('./lib/downloadImageByURL');
 
 const repoOwner = process.argv[2];
 const repoName = process.argv[3];
@@ -13,7 +13,7 @@ console.log('Welcome to the GitHub Avatar Downloader!');
 function getRepoContributors(repoOwner, repoName, cb) {
   if (repoOwner && repoName){
     //URL builder
-    let requestURL = 'https://'+ GITHUB_USER + ':' + GITHUB_TOKEN + '@api.github.com/repos/'
+    let requestURL = 'https://' + GITHUB_USER + ':' + GITHUB_TOKEN + '@api.github.com/repos/'
      + repoOwner + '/' + repoName + '/contributors';
 
     request({ url: requestURL,  headers: {'User-Agent': 'nikolovGeorgi'}}, (err, response, body) => {
@@ -32,7 +32,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
           //use separate function to download the content of the image
           //otherwise it'll download an empty string.
           downloadImageByURL(person.avatar_url, path + person.login + '.png');
-        })
+        });
       }
     });
   } else {
